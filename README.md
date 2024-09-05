@@ -20,5 +20,12 @@ npx create-react-app frontend
 cd frontend
 npm start # After this, navigate to http://localhost:3000 to verify.
 
-
+# Create Docker files
+# For the file contents, refer to the repository
+cd ..
+touch docker-compose.yml
+touch backend/Dockerfile
+touch frontend/Dockerfile
 ```
+
+## Fullstack demo app: Typyho - työsuhdepyörän huoltohistoria -sovellus

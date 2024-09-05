@@ -1,0 +1,23 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/opt/app
+    restart: always
+  backend:
+    build: ./backend
+    ports:
+      - "4000:3000"
+    volumes:
+      - ./backend:/opt/app
+    restart: always
+  mongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_REPLICA_HOST: mongodb
+      MONGO_REPLICA_PORT: 27017
+    restart: always 
