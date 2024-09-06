@@ -18,6 +18,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_REPLICA_HOST: mongodb
+      MONGO_INITDB_DATABASE: bikedb
       MONGO_REPLICA_PORT: 27017
     restart: always 
