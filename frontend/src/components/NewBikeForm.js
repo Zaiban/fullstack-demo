@@ -20,6 +20,8 @@ export default function NewBikeForm() {
       <Input placeholder="" />
       <FormLabel>Tilauspäivä</FormLabel>
       <Input type="date" />
+      <FormLabel>Hinta</FormLabel>
+      <Input type="number" />
       <br />
       <Button onClick={function(){}}>Lisää pyörä</Button>
     </FormControl>
