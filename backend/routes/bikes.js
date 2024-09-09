@@ -32,7 +32,7 @@ router.post("/code", async function (req, res, next) {
 
   // Check that the code is valid type and length
   if (typeof code !== "string" || code.length !== 6) {
-    res.status(500).json({ error: "Code not valid." });
+    res.json(null)
   } else {
     try {
       const bike = await Bike.findOne({ code });

@@ -30,7 +30,7 @@ const NewBikeForm = (props) => {
     = useState("hae pyörän tiedot koodilla...");
 
   useEffect(() => {
-    if (inputCode.length === 6) {
+    if (inputCode.length >= 6) {
       console.log("haetaan pyörää");
       const fetchBike = async () => {
         try {
