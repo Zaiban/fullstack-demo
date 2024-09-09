@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Alert from "@mui/joy/Alert";
+import Typography from "@mui/joy/Typography";
 
 const BikeDetails = (props) => {
   const { code } = props; // Extract code from URL
+  console.log("props?", props);
   const [bike, setBike] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,6 +13,7 @@ const BikeDetails = (props) => {
     const fetchBike = async () => {
       try {
         const response = await fetch(`http://localhost:4000/bikes/code`, {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
@@ -19,6 +23,7 @@ const BikeDetails = (props) => {
           throw new Error("Bike not found");
         }
         const data = await response.json();
+        console.log("bike:", data);
         setBike(data);
       } catch (error) {
         setError(error.message);
@@ -36,19 +41,35 @@ const BikeDetails = (props) => {
 
   return (
     <div>
-      <h1>Bike Details</h1>
+      <h1>Pyörän tiedot</h1>
       <p>
-        <strong>Brand:</strong> {bike.brand}
+        <strong>Koodi:</strong> <Typography level="h3">{bike.code}</Typography>
+        <Alert color="warning" size="lg">
+           ℹ️ Säilytä pyöräsi koodi päästäksesi pyöräsi tietoihin käsiksi jatkossa.😊
+        </Alert>
       </p>
       <p>
-        <strong>Model:</strong> {bike.model}
+        <strong>Merkki:</strong> {bike.brand}
       </p>
       <p>
-        <strong>Purchase Date:</strong>{" "}
-        {new Date(bike.purchaseDate).toLocaleDateString()}
+        <strong>Malli:</strong> {bike.model}
       </p>
       <p>
-        <strong>Code:</strong> {bike.code}
+        <strong>Väri:</strong> {bike.color}
+      </p>
+      <p>
+        <strong>Tilauspäivä:</strong>{" "}
+        {bike.purchaseDate ? (
+          <span>{new Date(bike.purchaseDate).toLocaleDateString()}</span>
+        ) : (
+          <span>
+            tuntematon
+            <Alert color="warning" size="lg">
+              ℹ️ Huom! Jos pyöräsi tilauspäivä ei ole tiedossa, maksuennustetta ei voida
+              laskea.
+            </Alert>
+          </span>
+        )}
       </p>
     </div>
   );

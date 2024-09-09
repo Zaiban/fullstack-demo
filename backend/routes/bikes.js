@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require("mongoose");
 var crypto = require("crypto");
 
-var Bike = require("../models/bike");
+var Bike = require("../models/Bike");
 
 const generateBikeCode = (id) => {
   // Generate a random hash from the MongoDB id
@@ -27,30 +27,35 @@ router.get("/", async function (req, res, next) {
 });
 
 /* GET bike with code. */
-router.get("/code", async function (req, res, next) {
+router.post("/code", async function (req, res, next) {
   const { code } = req.body;
-  try {
-    console.log("Fetching a bike from DB...");
-    const bike = await Bike.findOne({ code }); 
-    res.json(bike);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ error: `Error fetching the bikes: ${error.message}` });
+
+  // Check that the code is valid type and length
+  if (typeof code !== "string" || code.length !== 6) {
+    res.status(500).json({ error: "Code not valid." });
+  } else {
+    try {
+      const bike = await Bike.findOne({ code });
+      res.json(bike);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ error: `Error fetching the bikes: ${error.message}` });
+    }
   }
 });
 
 // ADD bike
 router.post("/add", async (req, res) => {
-  const { brand, model, purchaseDate } = req.body;
+  const { brand, model, color, purchaseDate } = req.body;
   console.log("adding bike...");
   console.log(`brand: ${brand} model: ${model} purchaseDate: ${purchaseDate}`);
   try {
-    const newBike = new Bike({ brand, model, purchaseDate });
+    const newBike = new Bike({ brand, model, color, purchaseDate });
     await newBike.save();
     const code = generateBikeCode(newBike._id);
     await Bike.findByIdAndUpdate(newBike._id, { code });
-    res.json({ code: code.toUpperCase() });
+    res.json({ code });
   } catch (error) {
     res.status(500).json({ error: "Adding the bike failed" });
     console.log("Error: ", error.message);

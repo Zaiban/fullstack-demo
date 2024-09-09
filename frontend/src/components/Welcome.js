@@ -23,7 +23,7 @@ function Welcome() {
     <div>
       <br />
       {bike.code.length > 0 ? (
-        <BikeDetails />
+        <BikeDetails code={bike.code} />
       ) : (
         <NewBikeForm handleSetBike={handleSetBike} />
       )}
