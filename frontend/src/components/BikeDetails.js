@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Alert from "@mui/joy/Alert";
 import Typography from "@mui/joy/Typography";
+import Table from '@mui/joy/Table';
+import Card from '@mui/joy/Card';
+import CardContent from '@mui/joy/CardContent';
+
 
 const BikeDetails = (props) => {
   const { code } = props; // Extract code from URL
@@ -40,38 +44,64 @@ const BikeDetails = (props) => {
   if (!bike) return <div>No bike found</div>;
 
   return (
-    <div>
-      <h1>Pyörän tiedot</h1>
-      <p>
-        <strong>Koodi:</strong> <Typography level="h3">{bike.code}</Typography>
-        <Alert color="warning" size="lg">
-           ℹ️ Säilytä pyöräsi koodi päästäksesi pyöräsi tietoihin käsiksi jatkossa.😊
-        </Alert>
-      </p>
-      <p>
-        <strong>Merkki:</strong> {bike.brand}
-      </p>
-      <p>
-        <strong>Malli:</strong> {bike.model}
-      </p>
-      <p>
-        <strong>Väri:</strong> {bike.color}
-      </p>
-      <p>
-        <strong>Tilauspäivä:</strong>{" "}
-        {bike.purchaseDate ? (
-          <span>{new Date(bike.purchaseDate).toLocaleDateString()}</span>
-        ) : (
-          <span>
-            tuntematon
-            <Alert color="warning" size="lg">
-              ℹ️ Huom! Jos pyöräsi tilauspäivä ei ole tiedossa, maksuennustetta ei voida
-              laskea.
-            </Alert>
-          </span>
-        )}
-      </p>
-    </div>
+    <Card sx={{ width: '30em' }}>
+      <Typography
+        level="title-lg"
+        sx={{ flex: '1 1 100%' }}
+        id="tableTitle"
+      >
+        Työsuhdepyöräsi tiedot
+      </Typography>
+      <Table aria-label="basic table" borderAxis="vertical">
+        <tbody>
+          <tr>
+            <td><b>Koodi</b></td>
+            <td><Typography fontSize="2em">{bike.code}</Typography></td>
+            <td>
+              ℹ️ Säilytä pyöräsi koodi päästäksesi pyöräsi tietoihin käsiksi jatkossa.😊
+            </td>
+          </tr>
+          <tr>
+            <td><b>Merkki</b></td>
+            <td>{bike.brand}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><b>Malli</b></td>
+            <td>{bike.model}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><b>Väri</b></td>
+            <td>{bike.color ? (
+              <span>{bike.color}</span>
+            ) : (
+              <span>Ei tiedossa</span>
+            )}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><b>Tilauspäivä</b></td>
+            <td>
+
+              {bike.purchaseDate ? (
+                <span>{new Date(bike.purchaseDate).toLocaleDateString()}</span>
+              ) : (<span>Ei tiedossa</span>)}
+            </td>
+            <td>
+              {!bike.purchaseDate ? (
+                <span>
+                  ℹ️ Huom! Jos pyöräsi tilauspäivä ei ole tiedossa, maksuennustetta ei voida
+                  laskea.
+                </span>
+              ) : (<span>
+                ℹ️ Huom! Pyörän maksuennustelaskelma-ominaisuus on vielä rakenteilla.
+              </span>)}
+            </td>
+          </tr>
+        </tbody>
+      </Table>
+    </Card>
   );
 };
 

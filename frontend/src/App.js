@@ -27,9 +27,10 @@ function App() {
             }}
             variant="outlined"
           >
-            <img src={logo} className="App-logo" alt="logo" />
             <Typography color="black" level="h2" variant="plain">
-              TSP-appi
+              TSP
+              <img src={logo} className="App-logo" alt="logo" />
+              -Appi
             </Typography>
             <Welcome />
           </Sheet>

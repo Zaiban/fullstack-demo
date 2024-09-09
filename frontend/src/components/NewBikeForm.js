@@ -24,7 +24,10 @@ const NewBikeForm = (props) => {
   // Tilat onnistumisviestille tai virheille
   const [message, setMessage] = useState("");
 
-  const [loading, setLoading] = useState(false);
+  // Code input field states
+  const [loading, setLoading] = useState(false); // Loading spinner
+  const [codeInputPlaceholder, setCodeInputPlaceholder]
+    = useState("hae pyörän tiedot koodilla...");
 
   useEffect(() => {
     if (inputCode.length === 6) {
@@ -46,6 +49,9 @@ const NewBikeForm = (props) => {
           console.log("bike:", data);
           if (data) {
             handleSetBike(data);
+          } else {
+            setInputCode("");
+            setCodeInputPlaceholder("🚳 Koodilla ei löytynyt pyörää.")
           }
         } catch (error) {
           console.log("error:", error);
@@ -99,7 +105,7 @@ const NewBikeForm = (props) => {
     <form onSubmit={addBike}>
       <FormControl>
         <Input
-          placeholder="haen pyörän tiedot koodilla.."
+          placeholder={codeInputPlaceholder}
           value={inputCode}
           onChange={(e) => setInputCode(e.target.value)}
           endDecorator={loading && <CircularProgress />}
@@ -112,7 +118,7 @@ const NewBikeForm = (props) => {
       <FormControl>
         <FormLabel>Merkki</FormLabel>
         <Input
-          placeholder="esim. Canyon"
+          placeholder="esim. Helkama.."
           value={brand}
           onChange={(e) => setBrand(e.target.value)}
         />
@@ -120,7 +126,7 @@ const NewBikeForm = (props) => {
       <FormControl>
         <FormLabel>Malli</FormLabel>
         <Input
-          placeholder="esim. Grail SL"
+          placeholder="esim. Jopo.."
           value={model}
           onChange={(e) => setModel(e.target.value)}
         />
