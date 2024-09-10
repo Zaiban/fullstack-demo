@@ -1,0 +1,4 @@
+FROM node:22
+COPY ./frontend/build /opt/app
+WORKDIR /opt/app
+CMD ["npx", "serve", "-s", "."]

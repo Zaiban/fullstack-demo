@@ -1,5 +1,6 @@
 variables:
-  REMOTE_HOST: deploy@esa-fullstack-demo0
+  REMOTE_HOST: deploy@172.16.6.6
+  #REMOTE_HOST: deploy@esa-fullstack-demo0
   REMOTE_DIR: fullstack-demo
 
 stages:
@@ -56,8 +57,8 @@ deploy:
     - mkdir -p ~/.ssh && (umask  077 ; echo "${DEPLOY_KEY_PRIVATE}" | base64 -d > ~/.ssh/id_rsa)
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     # Build containers
-    - docker build --no-cache -f backend/Dockerfile -t "${BACKEND_IMAGE}" .
-    - docker build --no-cache -f frontend/Dockerfile -t "${FRONTEND_IMAGE}" .
+    - docker build --no-cache -f backend/DockerfileServer -t "${BACKEND_IMAGE}" .
+    - docker build --no-cache -f frontend/DockerfileServer -t "${FRONTEND_IMAGE}" .
     # Push to remote
     - docker push "${BACKEND_IMAGE}"
     - docker push "${FRONTEND_IMAGE}"

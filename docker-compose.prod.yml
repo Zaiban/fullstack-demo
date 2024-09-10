@@ -1,1 +1,23 @@
-# placeholder
+services:
+  frontend:
+    image: ${FRONTEND_IMAGE}
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    restart: always
+  backend:
+    image: ${BACKEND_IMAGE}
+    ports:
+      - "4000:3000"
+    env_file:
+      - .env
+    restart: always
+  mongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: bikedb
+      MONGO_REPLICA_PORT: 27017
+    restart: always 
