@@ -28,4 +28,15 @@ touch backend/Dockerfile
 touch frontend/Dockerfile
 ```
 
+## Setting up the dev env
+
+### Environment files
+
+A file called `backend/.env` is required for the app to work. For the
+development environment, here is an example content:
+
+```sh
+MONGO_URI=mongodb://root:example@mongodb:27017/bikedb?authSource=admin
+```
+
 ## Fullstack demo app: Typyho - työsuhdepyörän huoltohistoria -sovellus
