@@ -57,8 +57,11 @@ router.post("/code", async function (req, res, next) {
 // ADD bike
 router.post("/add", async (req, res) => {
   const { brand, model, color, purchaseDate } = req.body;
-  console.log("adding bike...");
-  console.log(`brand: ${brand} model: ${model} purchaseDate: ${purchaseDate}`);
+
+  if (process.env.NODE_ENV !== "production") {
+    await delay(1000); // Simulate delay while in development
+  }
+
   try {
     const newBike = new Bike({ brand, model, color, purchaseDate });
     await newBike.save();

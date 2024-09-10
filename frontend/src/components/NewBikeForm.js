@@ -1,77 +1,96 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
-import FormControl from "@mui/joy/FormControl";
-import FormLabel from "@mui/joy/FormLabel";
-import FormHelperText from "@mui/joy/FormHelperText";
-import Input from "@mui/joy/Input";
-import Typography from "@mui/joy/Typography";
-import Button from "@mui/joy/Button";
-import CircularProgress from '@mui/joy/CircularProgress';
-
+import React, { useState, useEffect } from "react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Typography,
+  Button,
+  CircularProgress,
+} from "@mui/joy";
 
 const NewBikeForm = (props) => {
   // Handler for updating the bike information to parent
-  const { handleSetBike } = props;
+  const { handleSetBikeCode } = props;
 
+  // UI state
+  const [status, setStatus] = useState({
+    loadingFetch: false,
+    loadingAdd: false,
+    error: "",
+    placeholder: "hae pyörän tiedot koodilla...",
+  });
+
+  // Store the code input field
   const [inputCode, setInputCode] = useState("");
 
-  // Tilat pyörän tiedoille
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [color, setColor] = useState("");
-  const [purchaseDate, setPurchaseDate] = useState("");
+  // Store the bike input fields
+  const [bikeData, setBikeData] = useState({
+    brand: "",
+    model: "",
+    color: "",
+    purchaseDate: "",
+  });
 
-  // Tilat onnistumisviestille tai virheille
-  const [message, setMessage] = useState("");
-
-  // Code input field states
-  const [loading, setLoading] = useState(false); // Loading spinner
-  const [codeInputPlaceholder, setCodeInputPlaceholder]
-    = useState("hae pyörän tiedot koodilla...");
-
+  // Execute when user inputs 6 or more characters to the code input field
   useEffect(() => {
     if (inputCode.length >= 6) {
-      console.log("haetaan pyörää");
       const fetchBike = async () => {
         try {
-          setLoading(true);
+          // Display loading indicator
+          setStatus((prev) => ({ ...prev, loadingFetch: true }));
+
+          // Fetch bike data from backend with the "code"
           const response = await fetch(`http://localhost:4000/bikes/code`, {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ code: inputCode }),
           });
-          if (!response.ok) {
-            throw new Error("Bike not found");
-          }
+
+          // Parse the data from the backend response
           const data = await response.json();
-          console.log("bike:", data);
-          if (data) {
-            handleSetBike(data);
+
+          // If data is not null, call the parent component handler
+          if (response.ok && data && data.code) {
+            handleSetBikeCode(data.code);
           } else {
+            // Otherwise the bike did not exist. Message via input placeholder.
+            setStatus({
+              loadingFetch: false,
+              error: "",
+              placeholder: "🚳 Koodilla ei löytynyt pyörää.",
+            });
+
+            // Clear the code input field.
             setInputCode("");
-            setCodeInputPlaceholder("🚳 Koodilla ei löytynyt pyörää.")
           }
         } catch (error) {
-          console.log("error:", error);
-        } finally {
-          setLoading(false);
+          // If backend returns something else than a 2xx (OK) response
+          setStatus({
+            loadingFetch: false,
+            error: "",
+            placeholder: error.message || "Backend error.",
+          });
         }
       };
       fetchBike();
     }
   }, [inputCode]);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setBikeData((prev) => ({ ...prev, [name]: value }));
+  };
+
   // Funktio pyörän lisäämiseksi
   const addBike = async (e) => {
-    e.preventDefault(); // Estetään lomakkeen oletustoiminto
-
-    // Luodaan pyörän tiedot
-    const bikeData = { brand, model, color, purchaseDate };
-
+    // Prevent default form function
+    e.preventDefault();
     try {
-      // Lähetetään POST-pyyntö APIin
+      setStatus({
+        ...status,
+        loadingAdd: true,
+      });
+      // Call the backend add endpoint
       const response = await fetch("http://localhost:4000/bikes/add", {
         method: "POST",
         headers: {
@@ -80,24 +99,27 @@ const NewBikeForm = (props) => {
         body: JSON.stringify(bikeData),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setMessage(`Pyörä lisätty: ${data.brand} - ${data.model}`);
-        setBrand(""); // Tyhjennetään lomake
-        setModel("");
-        setColor("");
-        setPurchaseDate("");
+      // If backend call not ok, throw an Error
+      if (!response.ok) throw new Error(await response.text());
 
-        // Update the parent component state
-        console.log("updating parent:", data);
-        console.log("handleSetBike:", handleSetBike);
-        handleSetBike(data);
+      const data = await response.json();
+
+      // If data.code is received back
+      if (data && data.code) {
+        handleSetBikeCode(data.code);
       } else {
-        const errorData = await response.json();
-        setMessage(`Virhe: ${errorData.error}`);
+        setStatus({
+          ...status,
+          loadingAdd: false,
+          error: "Server error.",
+        });
       }
     } catch (error) {
-      setMessage("Virhe pyörän lisäämisessä");
+      setStatus({
+        ...status,
+        loadingAdd: false,
+        error: error.message,
+      });
     }
   };
 
@@ -105,10 +127,10 @@ const NewBikeForm = (props) => {
     <form onSubmit={addBike}>
       <FormControl>
         <Input
-          placeholder={codeInputPlaceholder}
+          placeholder={status.placeholder}
           value={inputCode}
           onChange={(e) => setInputCode(e.target.value)}
-          endDecorator={loading && <CircularProgress />}
+          endDecorator={status.loadingFetch && <CircularProgress />}
         />
       </FormControl>
       <br />
@@ -119,36 +141,48 @@ const NewBikeForm = (props) => {
         <FormLabel>Merkki</FormLabel>
         <Input
           placeholder="esim. Helkama.."
-          value={brand}
-          onChange={(e) => setBrand(e.target.value)}
+          name="brand"
+          value={bikeData.brand}
+          onChange={handleInputChange}
         />
       </FormControl>
       <FormControl>
         <FormLabel>Malli</FormLabel>
         <Input
           placeholder="esim. Jopo.."
-          value={model}
-          onChange={(e) => setModel(e.target.value)}
+          name="model"
+          value={bikeData.model}
+          onChange={handleInputChange}
         />
       </FormControl>
       <FormControl>
         <FormLabel>Väri</FormLabel>
         <Input
-          value={color}
-          onChange={(e) => setColor(e.target.value)}
-          placeholder=""
+          placeholder="esim. Sininen.."
+          name="color"
+          value={bikeData.color}
+          onChange={handleInputChange}
         />
       </FormControl>
       <FormControl>
         <FormLabel>Tilauspäivä</FormLabel>
         <Input
           type="date"
-          value={purchaseDate}
-          onChange={(e) => setPurchaseDate(e.target.value)}
+          name="purchaseDate"
+          value={bikeData.purchaseDate}
+          onChange={handleInputChange}
         />
       </FormControl>
       <br />
-      <Button type="submit">Lisää pyörä</Button>
+      <Button
+        type="submit"
+        loading={status.loadingAdd}
+        loadingPosition="end"
+        endDecorator={status.loadingAdd && <CircularProgress />}
+      >
+        Lisää pyörä
+      </Button>
+      {status.error && <Typography>{status.error}</Typography>}
     </form>
   );
 };

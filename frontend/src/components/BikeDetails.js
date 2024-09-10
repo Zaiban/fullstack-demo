@@ -24,8 +24,8 @@ const BikeDetails = (props) => {
           body: JSON.stringify({ code }),
         });
 
-        // If backend call fails, show text "Bike not found" in the UI
-        if (!response.ok) throw new Error("Bike not found.");
+        // If backend call not ok, throw an Error
+        if (!response.ok) throw new Error(await response.text());
 
         // Parse the data from the backend response
         const data = await response.json();
@@ -33,17 +33,17 @@ const BikeDetails = (props) => {
         // Update UI state
         setState({ bike: data, loading: false, error: null });
       } catch (error) {
-        // If backend returns something else than a 2xx (OK) response
+        // Handle the error and show in UI
         setState({
           bike: null,
           loading: false,
-          error: error.message || "Backend error.",
+          error: error.message || "Backend error.a",
         });
       }
     };
 
     fetchBike();
-  }, [code]);
+  }, []);
 
   const { bike, loading, error } = state;
 
@@ -62,38 +62,36 @@ const BikeDetails = (props) => {
   );
 
   return (
-    <Card sx={{ maxWidth: "30em" }}>
-      <CardContent>
-        <Typography level="title-lg" sx={{ flex: "1 1 100%" }} id="tableTitle">
-          Työsuhdepyöräsi tiedot
-        </Typography>
-        <Table aria-label="bike details table" borderAxis="vertical">
-          <tbody>
-            {renderValue(
-              "Koodi",
-              <Typography fontSize="2em">{bike.code}</Typography>,
-              "ℹ️ Pidä koodi tallessa.😊"
-            )}
-            {renderValue("Merkki", bike.brand)}
-            {renderValue("Malli", bike.model)}
-            {renderValue("Väri", bike.color)}
-            {renderValue(
-              "Tilauspäivä",
-              bike.purchaseDate
-                ? new Date(bike.purchaseDate).toLocaleDateString()
-                : null
-            )}
-            <tr>
-              <td colSpan="3">
-                {!bike.purchaseDate
-                  ? "ℹ️ Huom! Jos pyöräsi tilauspäivä ei ole tiedossa, maksuennustetta ei voida laskea."
-                  : "ℹ️ Huom! Pyörän maksuennustelaskelma-ominaisuus on vielä rakenteilla."}
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-      </CardContent>
-    </Card>
+    <div>
+      <Typography level="title-lg" sx={{ flex: "1 1 100%" }} id="tableTitle">
+        Työsuhdepyöräsi tiedot
+      </Typography>
+      <Table aria-label="bike details table" borderAxis="vertical">
+        <tbody>
+          {renderValue(
+            "Koodi",
+            <Typography fontSize="2em">{bike.code}</Typography>,
+            "ℹ️ Pidä koodi tallessa.😊"
+          )}
+          {renderValue("Merkki", bike.brand)}
+          {renderValue("Malli", bike.model)}
+          {renderValue("Väri", bike.color)}
+          {renderValue(
+            "Tilauspäivä",
+            bike.purchaseDate
+              ? new Date(bike.purchaseDate).toLocaleDateString()
+              : null
+          )}
+          <tr>
+            <td colSpan="3">
+              {!bike.purchaseDate
+                ? "ℹ️ Huom! Jos pyöräsi tilauspäivä ei ole tiedossa, maksuennustetta ei voida laskea."
+                : "ℹ️ Huom! Pyörän maksuennustelaskelma-ominaisuus on vielä rakenteilla."}
+            </td>
+          </tr>
+        </tbody>
+      </Table>
+    </div>
   );
 };
 

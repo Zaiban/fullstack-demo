@@ -1,35 +1,33 @@
 import { useState } from "react";
-import Typography from "@mui/joy/Typography";
+
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import Divider from '@mui/joy/Divider';
 
 import NewBikeForm from "./NewBikeForm";
 import BikeDetails from "./BikeDetails";
 
 function Welcome() {
-  // State for the bike
-  const [bike, setBike] = useState({
-    brand: "",
-    model: "",
-    purchaseDate: "",
-    code: "",
-  });
-  console.log('parent:', bike)
+  // Store the bike code
+  const [bikeCode, setBikeCode] = useState("");
 
+  const handleSetBikeCode = (code) => {
+    console.log('handleSetBikeCode:', code)
+    setBikeCode(code);
+  };
 
-  const handleSetBike = (data) => {
-    console.log('run handlesetbike', data)
-    setBike(data);
-  }
   return (
-    <div>
-      <br />
-      {bike.code.length > 0 ? (
-        <BikeDetails code={bike.code} />
-      ) : (
-        <NewBikeForm handleSetBike={handleSetBike} />
-      )}
-      <br />
-      <small>© 2024 Esa Parkkila</small>
-    </div>
+    <Card sx={{ maxWidth: "30em" }}>
+      <CardContent>
+        {bikeCode.length > 0 ? (
+          <BikeDetails code={bikeCode} />
+        ) : (
+          <NewBikeForm handleSetBikeCode={handleSetBikeCode} />
+        )}
+        <Divider />
+        <small>© 2024 Esa Parkkila</small>
+      </CardContent>
+    </Card>
   );
 }
 export default Welcome;
