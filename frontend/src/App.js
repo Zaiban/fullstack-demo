@@ -6,6 +6,11 @@ import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import CssBaseline from "@mui/joy/CssBaseline";
 
+
+const logoEl = (
+<img src={logo} className="App-logo" float="left" alt="Logo" />
+)
+
 function App() {
   return (
     <div className="App">
@@ -28,11 +33,11 @@ function App() {
             variant="outlined"
           >
             <Typography color="black" level="h2" variant="plain">
-              <img src={logo} className="App-logo" float="left" />
+              {logoEl}
               <span className="App-title">
                 TSP-Appi
               </span>
-              <img src={logo} className="App-logo" float="left" />
+              {logoEl}
             </Typography>
             <Welcome />
           </Sheet>

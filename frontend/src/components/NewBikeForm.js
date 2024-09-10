@@ -74,7 +74,7 @@ const NewBikeForm = (props) => {
       };
       fetchBike();
     }
-  }, [inputCode]);
+  }, [inputCode, handleSetBikeCode]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

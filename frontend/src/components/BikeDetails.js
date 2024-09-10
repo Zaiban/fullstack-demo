@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Typography from "@mui/joy/Typography";
 import Table from "@mui/joy/Table";
-import Card from "@mui/joy/Card";
-import CardContent from "@mui/joy/CardContent";
 
 const BikeDetails = (props) => {
   const { code } = props; // Code from parent component via props
@@ -43,7 +41,7 @@ const BikeDetails = (props) => {
     };
 
     fetchBike();
-  }, []);
+  }, [code]);
 
   const { bike, loading, error } = state;
 
