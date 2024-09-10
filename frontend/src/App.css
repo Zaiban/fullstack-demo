@@ -3,12 +3,13 @@
 }
 
 .App-logo {
-  height: 15vmin;
+  height: 3em;
   pointer-events: none;
 }
 
 .App-title {
-  margin: '0 1em';
+  margin-left: 2em;
+  margin-right: 2em;
   vertical-align: top;
 }
 

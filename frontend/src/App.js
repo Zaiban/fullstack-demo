@@ -8,7 +8,7 @@ import CssBaseline from "@mui/joy/CssBaseline";
 
 
 const logoEl = (
-<img src={logo} className="App-logo" float="left" alt="Logo" />
+  <img src={logo} className="App-logo" float="left" alt="Logo" />
 )
 
 function App() {
@@ -29,6 +29,7 @@ function App() {
               gap: 2,
               borderRadius: "sm",
               boxShadow: "md",
+              textWrap: "nowrap"
             }}
             variant="outlined"
           >
