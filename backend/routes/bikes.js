@@ -5,6 +5,11 @@ var crypto = require("crypto");
 
 var Bike = require("../models/Bike");
 
+// A helper function to create a delay
+const delay = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
 const generateBikeCode = (id) => {
   // Generate a random hash from the MongoDB id
   const hash = crypto.createHash("sha256").update(id.toString()).digest("hex");
@@ -30,9 +35,13 @@ router.get("/", async function (req, res, next) {
 router.post("/code", async function (req, res, next) {
   const { code } = req.body;
 
+  if (process.env.NODE_ENV !== "production") {
+    await delay(1000); // Simulate delay while in development
+  }
+
   // Check that the code is valid type and length
   if (typeof code !== "string" || code.length !== 6) {
-    res.json(null)
+    res.json(null);
   } else {
     try {
       const bike = await Bike.findOne({ code });
