@@ -6,6 +6,7 @@ services:
     env_file:
       - .env
     restart: always
+    network_mode: "host" ## Temp fix
   backend:
     image: ${BACKEND_IMAGE}
     ports:
@@ -13,6 +14,7 @@ services:
     env_file:
       - .env
     restart: always
+    network_mode: "host" ## Temp fix
   mongodb:
     image: mongo
     environment:
@@ -20,4 +22,5 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
       MONGO_INITDB_DATABASE: bikedb
       MONGO_REPLICA_PORT: 27017
-    restart: always 
+    restart: always
+    network_mode: "host" ## Temp fix
