@@ -16,7 +16,7 @@ const BikeDetails = (props) => {
     const fetchBike = async () => {
       try {
         // Fetch bike data from backend with the "code"
-        const response = await fetch(`http://localhost:4000/bikes/code`, {
+        const response = await fetch(`http://localhost:4000/api/v1/bikes/code`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ code }),
