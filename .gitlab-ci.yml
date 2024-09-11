@@ -1,5 +1,5 @@
 variables:
-  REMOTE_HOST: deploy@172.16.6.6
+  REMOTE_HOST: deploy@172.16.6.7
   #REMOTE_HOST: deploy@esa-fullstack-demo0
   REMOTE_DIR: fullstack-demo
 
