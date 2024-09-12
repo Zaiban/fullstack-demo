@@ -39,4 +39,16 @@ development environment, here is an example content:
 MONGO_URI=mongodb://root:example@mongodb:27017/bikedb?authSource=admin
 ```
 
-## Fullstack demo app: Typyho - työsuhdepyörän huoltohistoria -sovellus
+## Fullstack demo app: TSP-Appi (työsuhdepyöräsovellus)
+
+The objective is to create an app for managing employee bikes. An employee
+can save their bike with the app. The app can for example, store basic
+information about the bike, calculate the remaining payment plan, and
+keep a log of maintenance operations done on the bike.
+
+### Roadmap
+
+[x] Initial releas. 
+    Basic information about the bike, such as brand, model, color etc.
+[ ] Store and calculate the remaining payments.
+[ ] Store and manage the maintenance history.
