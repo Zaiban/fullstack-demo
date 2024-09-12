@@ -29,11 +29,10 @@ function App() {
               gap: 2,
               borderRadius: "sm",
               boxShadow: "md",
-              textWrap: "nowrap"
             }}
             variant="outlined"
           >
-            <Typography color="black" level="h2" variant="plain">
+            <Typography color="black" level="h2" variant="plain" sx={{ textWrap: "nowrap" }}>
               {logoEl}
               <span className="App-title">
                 TSP-Appi
