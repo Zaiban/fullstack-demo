@@ -56,14 +56,15 @@ router.post("/code", async function (req, res, next) {
 
 // ADD bike
 router.post("/add", async (req, res) => {
-  const { brand, model, color, purchaseDate } = req.body;
+  const { brand, model, purchaseDate, color, price } = req.body;
+  console.log('price:', price)
 
   if (process.env.NODE_ENV !== "production") {
     await delay(1000); // Simulate delay while in development
   }
 
   try {
-    const newBike = new Bike({ brand, model, color, purchaseDate });
+    const newBike = new Bike({ brand, model, purchaseDate, color, price });
     await newBike.save();
     const code = generateBikeCode(newBike._id);
     await Bike.findByIdAndUpdate(newBike._id, { code });

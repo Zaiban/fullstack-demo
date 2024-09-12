@@ -31,8 +31,9 @@ const NewBikeForm = (props) => {
   const [bikeData, setBikeData] = useState({
     brand: "",
     model: "",
-    color: "",
     purchaseDate: "",
+    color: "",
+    price: "",
   });
 
   // Execute when user inputs 6 or more characters to the code input field
@@ -86,7 +87,7 @@ const NewBikeForm = (props) => {
     setBikeData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Funktio pyörän lisäämiseksi
+  // Add a new bike
   const addBike = async (e) => {
     // Prevent default form function
     e.preventDefault();
@@ -143,7 +144,7 @@ const NewBikeForm = (props) => {
         Tai syötä uuden työsuhdepyöräsi tiedot alle 🚲😊
       </Typography>
       <FormControl>
-        <FormLabel>Merkki</FormLabel>
+        <FormLabel>Merkki (*)</FormLabel>
         <Input
           placeholder="esim. Helkama.."
           name="brand"
@@ -152,11 +153,20 @@ const NewBikeForm = (props) => {
         />
       </FormControl>
       <FormControl>
-        <FormLabel>Malli</FormLabel>
+        <FormLabel>Malli (*)</FormLabel>
         <Input
           placeholder="esim. Jopo.."
           name="model"
           value={bikeData.model}
+          onChange={handleInputChange}
+        />
+      </FormControl>
+      <FormControl>
+        <FormLabel>Tilauspäivä (*)</FormLabel>
+        <Input
+          type="date"
+          name="purchaseDate"
+          value={bikeData.purchaseDate}
           onChange={handleInputChange}
         />
       </FormControl>
@@ -170,11 +180,11 @@ const NewBikeForm = (props) => {
         />
       </FormControl>
       <FormControl>
-        <FormLabel>Tilauspäivä</FormLabel>
+        <FormLabel>Hinta</FormLabel>
         <Input
-          type="date"
-          name="purchaseDate"
-          value={bikeData.purchaseDate}
+          type="number"
+          name="price"
+          value={bikeData.price}
           onChange={handleInputChange}
         />
       </FormControl>

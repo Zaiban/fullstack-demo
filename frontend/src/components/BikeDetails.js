@@ -78,17 +78,18 @@ const BikeDetails = (props) => {
           )}
           {renderValue("Merkki", bike.brand)}
           {renderValue("Malli", bike.model)}
-          {renderValue("Väri", bike.color)}
           {renderValue(
             "Tilauspäivä",
             bike.purchaseDate
               ? new Date(bike.purchaseDate).toLocaleDateString()
               : null
           )}
+          {renderValue("Väri", bike.color)}
+          {renderValue("Hinta", `${bike.price} €`)}
           <tr>
             <td colSpan="3">
-              {!bike.purchaseDate
-                ? "ℹ️ Huom! Jos pyöräsi tilauspäivä ei ole tiedossa, maksuennustetta ei voida laskea."
+              {!bike.price
+                ? "ℹ️ Huom! Jos pyöräsi hinta ei ole tiedossa, maksuennustetta ei voida laskea."
                 : "ℹ️ Huom! Pyörän maksuennustelaskelma-ominaisuus on vielä rakenteilla."}
             </td>
           </tr>
