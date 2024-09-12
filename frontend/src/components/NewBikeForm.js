@@ -150,6 +150,7 @@ const NewBikeForm = (props) => {
           name="brand"
           value={bikeData.brand}
           onChange={handleInputChange}
+          required={true}
         />
       </FormControl>
       <FormControl>
@@ -159,6 +160,7 @@ const NewBikeForm = (props) => {
           name="model"
           value={bikeData.model}
           onChange={handleInputChange}
+          required={true}
         />
       </FormControl>
       <FormControl>
@@ -168,6 +170,7 @@ const NewBikeForm = (props) => {
           name="purchaseDate"
           value={bikeData.purchaseDate}
           onChange={handleInputChange}
+          required={true}
         />
       </FormControl>
       <FormControl>

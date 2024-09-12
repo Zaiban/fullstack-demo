@@ -24,6 +24,7 @@ function App() {
               gap: 2,
               borderRadius: "sm",
               boxShadow: "md",
+              maxWidth: "600px"
             }}
             variant="outlined"
           >
