@@ -9,7 +9,7 @@ services:
   backend:
     build: ./backend
     ports:
-      - "4000:3000"
+      - "4000:4000"
     volumes:
       - ./backend:/opt/app
     restart: always
