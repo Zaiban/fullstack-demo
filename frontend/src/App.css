@@ -8,15 +8,14 @@
 }
 
 .App-title {
-  margin-left: 2em;
-  margin-right: 2em;
+  margin-left: 1em;
+  margin-right: 1em;
   vertical-align: top;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
-    margin: '1em 0';
   }
 }
 

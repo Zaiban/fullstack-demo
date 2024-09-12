@@ -28,6 +28,8 @@ function App() {
               gap: 2,
               borderRadius: "sm",
               boxShadow: "md",
+              maxWidth: "80%",
+              verticalAlign: "center"
             }}
             variant="outlined"
           >

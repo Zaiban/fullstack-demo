@@ -17,7 +17,7 @@ function Welcome() {
   };
 
   return (
-    <Card sx={{ maxWidth: "30em" }}>
+    <Card sx={{ maxWidth: "95%" }}>
       <CardContent>
         {bikeCode.length > 0 ? (
           <BikeDetails code={bikeCode} />
