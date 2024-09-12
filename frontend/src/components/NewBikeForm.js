@@ -188,7 +188,9 @@ const NewBikeForm = (props) => {
           onChange={handleInputChange}
         />
       </FormControl>
-      <br />
+      <div>
+        <small>(*) pakollinen</small>
+      </div>
       <Button
         type="submit"
         loading={status.loadingAdd}
