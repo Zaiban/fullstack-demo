@@ -19,17 +19,11 @@ function App() {
           <CssBaseline />
           <Sheet
             sx={{
-              mx: 4, // margin left & right
-              my: 4, // margin top & bottom
-              py: 3, // padding top & bottom
-              px: 2, // padding left & right
               display: "flex",
               flexDirection: "column",
               gap: 2,
               borderRadius: "sm",
               boxShadow: "md",
-              maxWidth: "80%",
-              verticalAlign: "center"
             }}
             variant="outlined"
           >
