@@ -48,7 +48,7 @@ keep a log of maintenance operations done on the bike.
 
 ### Roadmap
 
-[x] Initial releas. 
-    Basic information about the bike, such as brand, model, color etc.
-[ ] Store and calculate the remaining payments.
-[ ] Store and manage the maintenance history.
+* [x] Initial release. 
+  * Basic information about the bike, such as brand, model, color etc.
+* [ ] Store and calculate the remaining payments.
+* [ ] Store and manage the maintenance history.
