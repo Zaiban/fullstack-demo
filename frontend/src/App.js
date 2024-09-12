@@ -19,7 +19,6 @@ function App() {
           <CssBaseline />
           <Sheet
             sx={{
-              minWidth: 500,
               mx: 4, // margin left & right
               my: 4, // margin top & bottom
               py: 3, // padding top & bottom
