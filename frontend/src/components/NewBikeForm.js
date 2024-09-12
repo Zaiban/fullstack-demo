@@ -8,6 +8,10 @@ import {
   CircularProgress,
 } from "@mui/joy";
 
+const BACKEND_URL = process.env.NODE_ENV === 'production'
+  ? 'https://fullstack-demo.project.tamk.cloud'
+  : 'http://localhost:4000';
+
 const NewBikeForm = (props) => {
   // Handler for updating the bike information to parent
   const { handleSetBikeCode } = props;
@@ -40,7 +44,8 @@ const NewBikeForm = (props) => {
           setStatus((prev) => ({ ...prev, loadingFetch: true }));
 
           // Fetch bike data from backend with the "code"
-          const response = await fetch(`http://localhost:4000/api/v1/bikes/code`, {
+
+          const response = await fetch(`${BACKEND_URL}/api/v1/bikes/code`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ code: inputCode }),
@@ -91,7 +96,7 @@ const NewBikeForm = (props) => {
         loadingAdd: true,
       });
       // Call the backend add endpoint
-      const response = await fetch("http://localhost:4000/api/v1/bikes/add", {
+      const response = await fetch(`${BACKEND_URL}/api/v1/bikes/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

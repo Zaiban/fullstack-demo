@@ -25,7 +25,7 @@ function Welcome() {
           <NewBikeForm handleSetBikeCode={handleSetBikeCode} />
         )}
         <Divider />
-        <small>© 2024 Esa Parkkila</small>
+        <small>© 2024 Esa Parkkila | App mode: {process.env.NODE_ENV}</small>
       </CardContent>
     </Card>
   );
