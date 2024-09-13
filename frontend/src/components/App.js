@@ -1,7 +1,7 @@
-import logo from "./logo.svg";
+import logo from "../images/logo.svg";
 import "./App.css";
 
-import Welcome from "./components/Welcome";
+import Welcome from "./Welcome";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import CssBaseline from "@mui/joy/CssBaseline";

@@ -4,9 +4,22 @@ variables:
   REMOTE_DIR: fullstack-demo
 
 stages:
-  #- test
+  - test
   - build
   - deploy
+
+test_frontend:
+  image: node:22-slim
+  stage: test
+  cache:
+    key: cache-frontend-$CI_COMMIT_REF_SLUG
+    paths:
+      - frontend/.npm
+      - frontend/node_modules
+  script:
+    - cd frontend
+    - npm install
+    - npm test
 
 
 build_backend:
@@ -27,6 +40,8 @@ build_backend:
 build_frontend:
   image: node:22-slim
   stage: build
+  dependencies:
+    - test_frontend
   cache:
     key: cache-frontend-$CI_COMMIT_REF_SLUG
     paths:
@@ -37,7 +52,6 @@ build_frontend:
       - frontend/build/
   script:
     - cd frontend
-    - npm i
     - npm run build
 
 deploy:
