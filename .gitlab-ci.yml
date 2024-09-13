@@ -63,12 +63,6 @@ deploy:
     - build_backend
     - build_frontend
   script:
-    #######
-    - nslookup esa-fullstack-demo0 || echo "DNS lookup failed"
-    - cat /etc/resolv.conf
-    - mount | grep tmpfs || true
-    - ping -c 1 esa-fullstack-demo0 || (echo "Ping failed" && exit 1)
-    #######
     - export BACKEND_IMAGE="${CI_REGISTRY_IMAGE}/backend"
     - export FRONTEND_IMAGE="${CI_REGISTRY_IMAGE}/frontend"
     - apk update && apk add rsync openssh
