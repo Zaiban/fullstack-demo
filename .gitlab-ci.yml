@@ -63,8 +63,12 @@ deploy:
     - build_backend
     - build_frontend
   script:
-    - apt update && apt install -y iputils-ping
+    #######
+    - nslookup esa-fullstack-demo0 || echo "DNS lookup failed"
+    - cat /etc/resolv.conf
+    - mount | grep tmpfs || true
     - ping -c 1 esa-fullstack-demo0 || (echo "Ping failed" && exit 1)
+    #######
     - export BACKEND_IMAGE="${CI_REGISTRY_IMAGE}/backend"
     - export FRONTEND_IMAGE="${CI_REGISTRY_IMAGE}/frontend"
     - apk update && apk add rsync openssh
@@ -73,8 +77,8 @@ deploy:
     - mkdir -p ~/.ssh && (umask  077 ; echo "${DEPLOY_KEY_PRIVATE}" | base64 -d > ~/.ssh/id_rsa)
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     # Build containers
-    - docker build --no-cache -f backend/DockerfileServer -t "${BACKEND_IMAGE}" .
-    - docker build --no-cache -f frontend/DockerfileServer -t "${FRONTEND_IMAGE}" .
+    - docker build --pull --cache-from "${BACKEND_IMAGE}" -f backend/DockerfileServer -t "${BACKEND_IMAGE}" .
+    - docker build --pull --cache-from "${FRONTEND_IMAGE}" -f frontend/DockerfileServer -t "${FRONTEND_IMAGE}" .
     # Push to remote
     - docker push "${BACKEND_IMAGE}"
     - docker push "${FRONTEND_IMAGE}"
