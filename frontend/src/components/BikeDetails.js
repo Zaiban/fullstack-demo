@@ -85,7 +85,7 @@ const BikeDetails = (props) => {
               : null
           )}
           {renderValue("Väri", bike.color)}
-          {renderValue("Hinta", `${bike.price} €`)}
+          {renderValue("Hinta", bike.price ? `${bike.price} €` : "Ei tiedossa")}
           <tr>
             <td colSpan="3">
               {!bike.price
