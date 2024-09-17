@@ -1,15 +1,30 @@
 # Fullstack Demo
 
-## Instructions about how this demo was set up
+## For the students of "Full stack web –sovelluksen rakenne ja toimintaperiaate"
+
+The shell commands below demonstrate how the development of this 
+"TSP-Appi" app was initially started. Follow this guide to get started with
+your own project.
+
+This guide expects that the student has the following environment setup:
+* Windows 10 or 11 development PC
+* Visual Studio Code as the editor: https://code.visualstudio.com/
+* WSL2 (Windows Subsystem For Linux) command line tool: https://learn.microsoft.com/en-us/windows/wsl/install
+  * In the WSL2 terminal: Node.js (install with NVM: https://github.com/nvm-sh/nvm)
+* Docker Desktop, Windows edition: https://www.docker.com/products/docker-desktop/
+
+**In the WSL terminal**
 
 ```bash
-# Create the root folder for git
+# Create the root folder for the project and init Git
 mkdir fullstack-demo
 cd fullstack-demo
 git init
-git remote add origin git@github.com:Zaiban/fullstack-demo.git
 
-# Init the backend with express-generator and test it
+## Optional: add your Git remote, i.e. GitHub 
+git remote add origin git@github.com:Username/name-of-the-repo.git
+
+# Generate backend files with express-generator and test it
 npx express-generator backend
 cd backend
 npm start # After this, navigate to http://localhost:3000 to verify.
@@ -21,14 +36,29 @@ cd frontend
 npm start # After this, navigate to http://localhost:3000 to verify.
 
 # Create Docker files
-# For the file contents, refer to the repository
+# For the file contents, see an example in this repo
 cd ..
 touch docker-compose.yml
 touch backend/Dockerfile
 touch frontend/Dockerfile
 ```
 
-## Setting up the dev env
+## For those wanting to dev the TSP-Appi app
+
+### Initial setup
+
+Clone the repo and install deps
+
+```sh
+git clone git@github.com:Zaiban/fullstack-demo.git
+cd fullstack-demo
+cd backend
+npm install
+cd ../frontend
+npm install
+cd ..
+docker-compose up -d
+```
 
 ### Environment files
 
