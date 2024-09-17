@@ -77,8 +77,8 @@ MONGO_URI=mongodb://root:example@mongodb:27017/bikedb?authSource=admin
 
 ## Fullstack demo app: TSP-Appi (työsuhdepyöräsovellus)
 
-The objective is to create an app for managing employee bikes. An employee
-can save their bike with the app. The app can for example, store basic
+The objective of this app is to create a tool for managing employee bikes. 
+An employee can save their bike with the app. The app can for example, store basic
 information about the bike, calculate the remaining payment plan, and
 keep a log of maintenance operations done on the bike.
 
