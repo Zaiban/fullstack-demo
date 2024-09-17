@@ -1,6 +1,6 @@
 # Fullstack Demo
 
-## For the students of "Full stack web –sovelluksen rakenne ja toimintaperiaate"
+## For the students of "Full stack web –sovelluksen rakenne ja toimintaperiaate": follow the guide below
 
 The shell commands below demonstrate how the development of this 
 "TSP-Appi" app was initially started. Follow this guide to get started with
@@ -41,6 +41,12 @@ cd ..
 touch docker-compose.yml
 touch backend/Dockerfile
 touch frontend/Dockerfile
+
+# Open the root folder in VSCode
+code .
+
+# After docker files are in order, start the dev env
+docker-compose up -d
 ```
 
 ## For those wanting to dev the TSP-Appi app
