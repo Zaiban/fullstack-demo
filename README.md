@@ -50,14 +50,20 @@ keep a log of maintenance operations done on the bike.
 
 * [x] `0.1.0` Initial release. 
   * Basic information about the bike, such as brand, model, color etc.
-* [ ] `0.2.0` Store and calculate the remaining payments.
-  * [ ] Desing database models
-  * [ ] Back-end logic
-  * [ ] UI components
-* [ ] `0.3.0` Store and manage the maintenance history.
-  * [ ] Desing database models
-  * [ ] Back-end logic
-  * [ ] UI components
+* [ ] `0.2.0` Payments Management (In Progress)
+  * Features:
+    * Store and calculate remaining payments.
+  * Tasks:
+    * [ ] Desing database models
+    * [ ] Back-end logic
+    * [ ] UI components
+* [ ] `0.3.0` Maintenance History (Upcoming)
+  * Features:
+    * Store and manage maintenance history.
+  * Tasks:
+    * [ ] Desing database models
+    * [ ] Back-end logic
+    * [ ] UI components
 * [ ] `1.0.0` Internationalization & Final release
   * Features:
     * Support for multiple languages (English & Finnish)
