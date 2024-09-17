@@ -48,17 +48,17 @@ keep a log of maintenance operations done on the bike.
 
 ### Roadmap
 
-* [x] Initial release. 
+* [x] `0.1.0`: Initial release. 
   * Basic information about the bike, such as brand, model, color etc.
-* [ ] Store and calculate the remaining payments.
+* [ ] `0.2.0` Store and calculate the remaining payments.
   * [ ] Database models
   * [ ] Back-end logic
   * [ ] UI components
-* [ ] Store and manage the maintenance history.
+* [ ] `0.3.0` Store and manage the maintenance history.
   * [ ] Database models
   * [ ] Back-end logic
   * [ ] UI components
-* [ ] International UI (English & Finnish)
+* [ ] `1.0.0` International UI (English & Finnish)
   * [ ] Language select mechanism via dropdown menu
   * [x] Finnish translation
   * [ ] English translation
