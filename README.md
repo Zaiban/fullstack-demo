@@ -51,4 +51,14 @@ keep a log of maintenance operations done on the bike.
 * [x] Initial release. 
   * Basic information about the bike, such as brand, model, color etc.
 * [ ] Store and calculate the remaining payments.
+  * [ ] Database models
+  * [ ] Back-end logic
+  * [ ] UI components
 * [ ] Store and manage the maintenance history.
+  * [ ] Database models
+  * [ ] Back-end logic
+  * [ ] UI components
+* [ ] International UI (English & Finnish)
+  * [ ] Language select mechanism via dropdown menu
+  * [x] Finnish translation
+  * [ ] English translation
