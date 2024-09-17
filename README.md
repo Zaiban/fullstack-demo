@@ -48,17 +48,26 @@ keep a log of maintenance operations done on the bike.
 
 ### Roadmap
 
-* [x] `0.1.0`: Initial release. 
+* [x] `0.1.0` Initial release. 
   * Basic information about the bike, such as brand, model, color etc.
 * [ ] `0.2.0` Store and calculate the remaining payments.
-  * [ ] Database models
+  * [ ] Desing database models
   * [ ] Back-end logic
   * [ ] UI components
 * [ ] `0.3.0` Store and manage the maintenance history.
-  * [ ] Database models
+  * [ ] Desing database models
   * [ ] Back-end logic
   * [ ] UI components
-* [ ] `1.0.0` International UI (English & Finnish)
-  * [ ] Language select mechanism via dropdown menu
-  * [x] Finnish translation
-  * [ ] English translation
+* [ ] `1.0.0` Internationalization & Final release
+  * Features:
+    * Support for multiple languages (English & Finnish)
+    * Finalize and stabilize the application with testing.
+  * Tasks:
+    * [ ] Implement language selecttion mechanism (via dropdown menu)
+    * Translations:
+      * [x] Finnish translation
+      * [ ] English translation
+    * Testing:
+      * [ ] Unit tests for all major components
+      * [ ] Implement integration tests
+    * [ ] Fix any remaining bugs
