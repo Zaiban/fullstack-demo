@@ -83,6 +83,7 @@ deploy:
     - echo "BACKEND_IMAGE=${BACKEND_IMAGE}" >> "${REMOTE_DIR}/.env"
     - echo "FRONTEND_IMAGE=${FRONTEND_IMAGE}" >> "${REMOTE_DIR}/.env"
     - echo "MONGO_URI=${MONGO_URI}" >> "${REMOTE_DIR}/.env"
+    - echo "NODE_ENV=production" >> "${REMOTE_DIR}/.env"
     # Copy files to server
     - rsync -r "${REMOTE_DIR}" "${REMOTE_HOST}:./"
     # Run container-setup.sh to set up Docker environment on the remote server
