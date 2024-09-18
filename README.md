@@ -105,7 +105,7 @@ keep a log of maintenance operations done on the bike.
     * Support for multiple languages (English & Finnish)
     * Finalize and stabilize the application with testing.
   * Tasks:
-    * [ ] Implement language selecttion mechanism (via dropdown menu)
+    * [ ] Implement language selection mechanism (via dropdown menu)
     * Translations:
       * [x] Finnish translation
       * [ ] English translation

@@ -56,18 +56,23 @@ router.post("/code", async function (req, res, next) {
 
 // ADD bike
 router.post("/add", async (req, res) => {
+  console.log('req.body:', req.body)
   const { brand, model, purchaseDate, color, price } = req.body;
-  console.log('price:', price)
 
   if (process.env.NODE_ENV !== "production") {
-    await delay(1000); // Simulate delay while in development
+    await delay(10000); // 10 sec latency in development mode
   }
 
   try {
+    // Create a mongo Bike model object
     const newBike = new Bike({ brand, model, purchaseDate, color, price });
+    // Write data to the database
     await newBike.save();
+    // Generate an unique bike code
     const code = generateBikeCode(newBike._id);
+    // Save the code also to DB
     await Bike.findByIdAndUpdate(newBike._id, { code });
+    // Return the code as a response back to the front-end
     res.json({ code });
   } catch (error) {
     res.status(500).json({ error: "Adding the bike failed" });
